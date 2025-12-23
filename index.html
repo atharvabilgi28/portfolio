@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharva Bilgi | Mechanical & Systems Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .eng-grid { background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans eng-grid">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto p-4 flex justify-between items-center">
+            <span class="font-mono font-bold tracking-tighter text-blue-700 text-lg underline decoration-2 underline-offset-4 uppercase">Project Portfolio</span>
+            <div class="flex items-center space-x-8 text-xs uppercase font-bold tracking-widest text-slate-600">
+                <a href="#work" class="hidden md:block hover:text-blue-600 transition">Projects</a>
+                <a href="#about" class="hidden md:block hover:text-blue-600 transition">About</a>
+                <a href="mailto:atharvabilgi28@gmail.com" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition lowercase tracking-normal font-normal inline-flex items-center">contact@me</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-6xl mx-auto px-6 py-24">
+        <div class="border-l-8 border-blue-600 pl-8">
+            <h1 class="text-6xl md:text-7xl font-black text-slate-900 mb-2 leading-none">Atharva Pravin Bilgi</h1>
+            <h2 class="text-xl font-mono text-blue-500 uppercase tracking-[0.3em] font-bold">Mechanical & Systems Engineer</h2>
+        </div>
+        <p class="mt-10 text-xl text-slate-600 max-w-3xl leading-relaxed border-t border-slate-200 pt-8">
+            Specializing in Model-Based Design (MBD) for vehicle powertrains. I bridge the gap between mechanical hardware and control logic through high-fidelity Plant Modeling and supervisory energy management strategies.
+        </p>
+    </header>
+
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="p-4 bg-white border border-slate-200 rounded shadow-sm">
+                <h4 class="font-bold text-blue-600 text-xs mb-2 uppercase tracking-widest">Controls</h4>
+                <p class="text-sm text-slate-500 font-bold">MATLAB / Simulink / Simscape</p>
+            </div>
+            <div class="p-4 bg-white border border-slate-200 rounded shadow-sm">
+                <h4 class="font-bold text-blue-600 text-xs mb-2 uppercase tracking-widest">Simulation</h4>
+                <p class="text-sm text-slate-500 font-bold">ANSYS (FEA/CFD) / Fluent</p>
+            </div>
+            <div class="p-4 bg-white border border-slate-200 rounded shadow-sm">
+                <h4 class="font-bold text-blue-600 text-xs mb-2 uppercase tracking-widest">Prototyping</h4>
+                <p class="text-sm text-slate-500 font-bold">3D Printing / SLS / Carbon Fiber</p>
+            </div>
+            <div class="p-4 bg-white border border-slate-200 rounded shadow-sm">
+                <h4 class="font-bold text-blue-600 text-xs mb-2 uppercase tracking-widest">Programming</h4>
+                <p class="text-sm text-slate-500 font-bold">Python / C++ / C</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="max-w-6xl mx-auto px-6 py-20">
+        <h3 class="text-4xl font-black mb-16 text-slate-900 italic">PROJECTS</h3>
+        
+        <div class="space-y-32">
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-4">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                        <img src="https://via.placeholder.com/800x450" alt="Main Model" class="w-full h-full object-cover opacity-90">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200">
+                            <img src="https://via.placeholder.com/400x225" alt="Subsystem detail" class="w-full h-full object-cover opacity-90">
+                        </div>
+                        <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200">
+                            <img src="https://via.placeholder.com/400x225" alt="Simulation Graph" class="w-full h-full object-cover opacity-90">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 01 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">Parallel Hybrid EV Modeling</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed italic">Developing and simulating parallel hybrid electric vehicle (HEV) powertrain architecture, including subsystem-level modeling and control algorithm validation.</p>
+                    <ul class="mt-6 space-y-2 text-sm text-slate-500 font-mono">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Supervisory Control Logic (Stateflow)</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> P2 Hybrid Configuration Modeling</li>
+                    </ul>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Simulink</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">MATLAB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="md:order-last overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="Nano Drone" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 02 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">Nano Drone Development</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Mechanical design and complete electronic integration of nano-class drones (sub-250g). Optimized for weight and stability.</p>
+                    <ul class="mt-6 space-y-2 text-sm text-slate-500 font-mono">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Mechnaical Design</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Electronic Integration</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Kinematic Optimization</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> FEA & CFD Analysis</li>
+                    </ul>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">SolidWorks</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Ansys</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="SCARA Robot" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 03 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">5-Arm SCARA Drawing Robot</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Implementation of 5-DOF robot with backlash compensation code and PID tuning for precision disturbances minimization.</p>
+                    <ul class="mt-6 space-y-2 text-sm text-slate-500 font-mono">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Optimum link length calculations</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Control disturbance minimization</li>
+                    </ul>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">MATLAB</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Control Theory</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="md:order-last overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="Refuelling" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 04 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">On-Orbit Refuelling Mechanism</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Probe and drogue fuel transfer system for satellite longevity. Integrated electronic and sensor suites for autonomous docking.</p>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Siemens NX</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Space Tech</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="DAQ System" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 05 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">Data Acquisition (DAQ) System</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">System architecture for real-time monitoring of FSAE vehicle dynamics, including strain, gyro, and thermal parameters.</p>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Mechatronics</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Simulink</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="md:order-last overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="Air Intake" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 06 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">FSAE Air Intake Package</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Integrated filter, restrictor, and plenum design. Optimized for flow using CFD and fabricated with Carbon Fiber layup.</p>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">CFD / Fluent</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Manufacturing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
+                    <img src="https://via.placeholder.com/800x450" alt="Leadership" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div>
+                    <span class="text-blue-600 font-mono text-sm font-bold">[ 07 ]</span>
+                    <h4 class="text-3xl font-bold mt-2">Team Captain - FSAE Combustion</h4>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Led a 50+ member team. Managed design, manufacturing, sponsorship, and validation for a Formula Student car.</p>
+                    <div class="mt-8 flex gap-2">
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Project Management</span>
+                        <span class="text-[10px] border border-slate-300 px-3 py-1 rounded-full uppercase font-bold">Leadership</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="about" class="bg-slate-900 text-white py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-8 italic">Engineering Philosophy</h3>
+            <p class="text-slate-400 text-xl leading-relaxed mb-12">
+                "Good engineering isn't just about making things work—it's about making things **reliable, manufacturable, and efficient.**"
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="mailto:atharvabilgi28@gmail.com" class="bg-blue-600 px-10 py-4 rounded-full font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/20">Email Me</a>
+                <a href="#" class="border border-slate-700 px-10 py-4 rounded-full font-bold hover:bg-slate-800 transition">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
