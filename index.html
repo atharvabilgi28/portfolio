@@ -62,14 +62,14 @@
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-4">
                     <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
-                    <img src="images/arch1.png" alt="Main Model" class="w-full h-full object-cover opacity-90">
+                        <img src="images/arch1.png" alt="Main Model" class="w-full h-full object-cover opacity-90">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200">
                             <img src="images/arch2.png" alt="Subsystem detail" class="w-full h-full object-cover opacity-90">
                         </div>
                         <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200">
-                            <img src="images/architecture.png/400x225" alt="Simulation Graph" class="w-full h-full object-cover opacity-90">
+                            <img src="images/architecture.png" alt="Simulation Graph" class="w-full h-full object-cover opacity-90">
                         </div>
                     </div>
                 </div>
@@ -89,20 +89,26 @@
                 </div>
             </div>
 
-          <div class="md:order-last grid grid-cols-2 gap-4">
-             <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
-             <img src="images/nanodrone1.jpeg" alt="Drone View 1" class="w-full h-full object-cover opacity-90">
-         </div>
-              <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200">
-        <img src="images/nanodrone2.png" alt="Drone View 2" class="w-full h-full object-cover opacity-90">
-    </div>
-</div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="md:order-last grid grid-cols-2 gap-4">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
+                        <a href="images/nanodrone1.jpeg" target="_blank" class="cursor-zoom-in">
+                            <img src="images/nanodrone1.jpeg" alt="Drone View 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
+                        </a>
+                    </div>
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
+                        <a href="images/nanodrone2.png" target="_blank" class="cursor-zoom-in">
+                            <img src="images/nanodrone2.png" alt="Drone View 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
+                        </a>
+                    </div>
+                </div>
+
                 <div>
                     <span class="text-blue-600 font-mono text-sm font-bold">[ 02 ]</span>
                     <h4 class="text-3xl font-bold mt-2">Nano Drone Development</h4>
                     <p class="text-slate-600 mt-4 leading-relaxed">Mechanical design and complete electronic integration of nano-class drones (sub-250g). Optimized for weight and stability.</p>
                     <ul class="mt-6 space-y-2 text-sm text-slate-500 font-mono">
-                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Mechnaical Design</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Mechanical Design</li>
                         <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Electronic Integration</li>
                         <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> Kinematic Optimization</li>
                         <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span> FEA & CFD Analysis</li>
@@ -210,7 +216,4 @@
     </footer>
 
 </body>
-
 </html>
-
-
