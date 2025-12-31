@@ -8,6 +8,15 @@
     <style>
         html { scroll-behavior: smooth; }
         .eng-grid { background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
+        
+        /* Modal Animation */
+        dialog[open] {
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans eng-grid">
@@ -60,16 +69,17 @@
         <div class="space-y-32">
             
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="images/arch1.png" target="_blank" class="cursor-zoom-in">
-                            <img src="images/arch1.png" alt="Main Model" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                <div class="space-y-4">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/arch1.png" alt="Main Model" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="images/arch2.png" target="_blank" class="cursor-zoom-in">
-                            <img src="images/arch2.png" alt="Subsystem Detail" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                            <img src="images/arch2.png" alt="Subsystem detail" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="overflow-hidden rounded-xl bg-slate-900 aspect-video shadow-md border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                            <img src="images/architecture.png" alt="Simulation Graph" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
+                        </div>
                     </div>
                 </div>
 
@@ -89,16 +99,12 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-last grid grid-cols-2 gap-4">
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="images/nanodrone1.jpeg" target="_blank" class="cursor-zoom-in">
-                            <img src="images/nanodrone1.jpeg" alt="Drone View 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                <div class="md:order-last space-y-6">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/nanodrone1.jpeg" alt="Drone View 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="images/nanodrone2.png" target="_blank" class="cursor-zoom-in">
-                            <img src="images/nanodrone2.png" alt="Drone View 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/nanodrone2.png" alt="Drone View 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
                 </div>
 
@@ -120,16 +126,12 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                            <img src="images/scara1.jpeg" alt="SCARA View 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                <div class="space-y-6">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/scara1.jpeg" alt="SCARA View 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                            <img src="images/scara2.jpeg" alt="SCARA View 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/scara2.jpeg" alt="SCARA View 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
                 </div>
 
@@ -149,16 +151,12 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-last grid grid-cols-2 gap-4">
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                            <img src="images/oor.jpg" alt="Refuelling 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                <div class="md:order-last space-y-6">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/oor.jpg" alt="Refuelling 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                             <img src="images/Picture1.png" alt="Refuelling 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/Picture1.png" alt="Refuelling 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
                 </div>
 
@@ -193,16 +191,12 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-last grid grid-cols-2 gap-4">
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                            <img src="images/Air_intake.png" alt="Intake 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                <div class="md:order-last space-y-6">
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/Air_intake.png" alt="Intake 1" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
-                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                        <a href="#" target="_blank" class="cursor-zoom-in">
-                            <img src="images/Intake.jpeg" alt="Intake 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                        </a>
+                    <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                        <img src="images/Intake.jpeg" alt="Intake 2" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                     </div>
                 </div>
 
@@ -218,10 +212,8 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 group">
-                    <a href="#" target="_blank" class="cursor-zoom-in">
-                        <img src="images/Velocita.JPG" alt="Leadership Team" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
-                    </a>
+                <div class="overflow-hidden rounded-2xl bg-slate-900 aspect-video shadow-xl border border-slate-200 cursor-zoom-in group" onclick="openModal(this.querySelector('img').src)">
+                    <img src="Velocita.JPG" alt="Leadership Team" class="w-full h-full object-cover opacity-90 transition duration-500 group-hover:scale-105">
                 </div>
 
                 <div>
@@ -251,6 +243,32 @@
         </div>
     </footer>
 
+    <dialog id="imageModal" class="backdrop:bg-black/90 bg-transparent p-0 overflow-hidden w-full h-full max-w-full max-h-full outline-none fixed inset-0 z-[100]" onclick="closeModal()">
+        <div class="w-full h-full flex items-center justify-center p-4">
+            <button class="absolute top-6 right-6 text-white/80 hover:text-white z-50 p-2 bg-black/50 rounded-full" onclick="closeModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="modalImage" src="" class="max-w-full max-h-full object-contain rounded shadow-2xl" onclick="event.stopPropagation()">
+        </div>
+    </dialog>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modalImg.src = src;
+            modal.showModal();
+            document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+        }
+
+        function closeModal() {
+            modal.close();
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    </script>
+
 </body>
 </html>
-
