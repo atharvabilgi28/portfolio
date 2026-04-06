@@ -9,7 +9,7 @@
          FONTS
          - System font stack: SF Pro (Apple), Segoe UI (Windows), then
            Helvetica Neue as universal fallback
-         - Calibri for body text (clean, professional, widely available)
+         - Calibri for body text
          - SF Mono / Consolas for technical labels
          - No external font downloads — instant load, zero FOUT
     =================================================================== -->
@@ -17,19 +17,16 @@
     <style>
         /* =============================================================
            CSS VARIABLES
-           - Central color palette, spacing, and type scale
-           - Dark navy + warm white + accent orange for an engineering
-             journal aesthetic that avoids generic blue-white-gray
         ============================================================= */
         :root {
-            --bg-primary: #0C0F14;        /* deep navy-black */
-            --bg-secondary: #F7F5F0;      /* warm off-white */
-            --bg-card: #141820;           /* slightly lighter dark */
-            --text-primary: #F7F5F0;      /* light text on dark */
-            --text-secondary: #9BA3AF;    /* muted text */
-            --text-dark: #1A1D23;         /* dark text on light bg */
+            --bg-primary: #0C0F14;
+            --bg-secondary: #F7F5F0;
+            --bg-card: #141820;
+            --text-primary: #F7F5F0;
+            --text-secondary: #9BA3AF;
+            --text-dark: #1A1D23;
             --text-dark-muted: #5A6170;
-            --accent: #E8622C;            /* burnt orange accent */
+            --accent: #E8622C;
             --accent-glow: rgba(232, 98, 44, 0.15);
             --border: rgba(255,255,255,0.06);
             --border-light: rgba(0,0,0,0.08);
@@ -40,597 +37,142 @@
 
         /* =============================================================
            RESET & BASE
-           - Smooth scroll, box-sizing, zero default margins
-           - Anti-aliased font rendering for crisp type
         ============================================================= */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        body {
-            font-family: var(--font-body);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
         a { color: inherit; text-decoration: none; }
         img { max-width: 100%; display: block; }
 
         /* =============================================================
-           SCROLL-DRIVEN REVEAL ANIMATION
-           - Elements with .reveal start invisible and slide up on
-             intersection with viewport (handled by IntersectionObserver)
+           SCROLL REVEAL
         ============================================================= */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
         /* =============================================================
            NAVIGATION
-           - Sticky, semi-transparent with backdrop blur
-           - Minimal: just name + links + CTA
         ============================================================= */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(12, 15, 20, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-        }
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-logo {
-            font-family: var(--font-mono);
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-        .nav-links a {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            transition: color 0.3s;
-        }
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(12,15,20,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: var(--font-mono); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-links a { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); transition: color 0.3s; }
         .nav-links a:hover { color: var(--text-primary); }
-        .nav-cta {
-            background: var(--accent) !important;
-            color: var(--bg-primary) !important;
-            padding: 0.55rem 1.3rem;
-            border-radius: 4px;
-            font-weight: 600 !important;
-            transition: background 0.3s !important;
-        }
+        .nav-cta { background: var(--accent) !important; color: var(--bg-primary) !important; padding: 0.55rem 1.3rem; border-radius: 4px; font-weight: 600 !important; transition: background 0.3s !important; }
         .nav-cta:hover { background: #d4571f !important; }
 
         /* =============================================================
-           HERO SECTION
-           - Full-viewport height with large serif heading
-           - Descriptive subtitle using mono font for technical tone
-           - Subtle grain texture overlay for depth
+           HERO
         ============================================================= */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 6rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 30% 50%, rgba(232, 98, 44, 0.04) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .hero-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .hero-label::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--accent);
-        }
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            line-height: 1.05;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 2rem;
-        }
-        .hero h1 em {
-            font-style: normal;
-            font-weight: 300;
-            color: var(--accent);
-        }
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-        }
-        .hero-stats {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-        .hero-stat {
-            border-left: 2px solid var(--accent);
-            padding-left: 1rem;
-        }
-        .hero-stat-value {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--text-primary);
-        }
-        .hero-stat-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-top: 0.2rem;
-        }
-        .hero-scroll-hint {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            animation: float 2s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-8px); }
-        }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 50%, rgba(232,98,44,0.04) 0%, transparent 60%); pointer-events: none; }
+        .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+        .hero-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+        .hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem,8vw,7rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 2rem; }
+        .hero h1 em { font-style: normal; font-weight: 300; color: var(--accent); }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; line-height: 1.8; }
+        .hero-scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); animation: float 2s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
 
         /* =============================================================
-           ABOUT / EXPERIENCE SECTION
-           - Light background for contrast rhythm
-           - Two-column layout: narrative + experience timeline
+           ABOUT / EXPERIENCE
         ============================================================= */
-        .section-light {
-            background: var(--bg-secondary);
-            color: var(--text-dark);
-        }
-        .section-pad {
-            padding: 7rem 2rem;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-tag {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .section-tag::before {
-            content: '';
-            width: 24px;
-            height: 1px;
-            background: var(--accent);
-        }
-        .section-heading {
-            font-family: var(--font-display);
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 600;
-            line-height: 1.15;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-        .about-text {
-            font-size: 1.05rem;
-            color: var(--text-dark-muted);
-            line-height: 1.85;
-        }
+        .section-light { background: var(--bg-secondary); color: var(--text-dark); }
+        .section-pad { padding: 7rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+        .section-heading { font-family: var(--font-display); font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 600; line-height: 1.15; margin-bottom: 2rem; letter-spacing: -0.02em; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+        .about-text { font-size: 1.05rem; color: var(--text-dark-muted); line-height: 1.85; }
         .about-text p + p { margin-top: 1.2rem; }
 
-        /* ---- Experience Timeline ---- */
         .timeline { margin-top: 1rem; }
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            padding-bottom: 2.5rem;
-            border-left: 1px solid rgba(0,0,0,0.1);
-        }
+        .timeline-item { position: relative; padding-left: 2rem; padding-bottom: 2.5rem; border-left: 1px solid rgba(0,0,0,0.1); }
         .timeline-item:last-child { padding-bottom: 0; }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 6px;
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-        .timeline-role {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-        .timeline-org {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-dark-muted);
-            margin-top: 0.2rem;
-        }
-        .timeline-date {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-top: 0.3rem;
-        }
+        .timeline-item::before { content: ''; position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+        .timeline-role { font-weight: 600; font-size: 0.95rem; color: var(--text-dark); }
+        .timeline-org { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dark-muted); margin-top: 0.2rem; }
+        .timeline-date { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-top: 0.3rem; }
 
         /* =============================================================
            SKILLS BAR
-           - Horizontal scrolling row of skill categories
-           - Dark section between about and projects
         ============================================================= */
-        .skills-bar {
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 3rem 2rem;
-            overflow-x: auto;
-        }
-        .skills-bar-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
-        }
-        .skill-category h4 {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
-        .skill-category p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
+        .skills-bar { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3rem 2rem; overflow-x: auto; }
+        .skills-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(5,1fr); gap: 2rem; }
+        .skill-category h4 { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+        .skill-category p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
 
         /* =============================================================
-           PROJECTS SECTION
-           - This is the main event — deep case-study cards
-           - Each project card has: number, title, problem/approach/outcome,
-             tags, and image gallery
-           - Alternating layout (image left/right) for visual rhythm
+           PROJECTS
         ============================================================= */
-        .projects-section {
-            padding: 7rem 2rem;
-        }
-        .project-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 8rem;
-        }
+        .projects-section { padding: 7rem 2rem; }
+        .project-card { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 8rem; }
         .project-card:last-child { margin-bottom: 0; }
         .project-card.reversed .project-visuals { order: 2; }
         .project-card.reversed .project-content { order: 1; }
+        .project-number { font-family: var(--font-display); font-size: 4rem; color: rgba(232,98,44,0.15); line-height: 1; margin-bottom: 0.5rem; }
+        .project-title { font-family: var(--font-display); font-size: 2rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+        .project-context { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+        .project-detail { margin-bottom: 1.2rem; }
+        .project-detail-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.3rem; }
+        .project-detail-text { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75; }
+        .project-metrics { display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+        .metric { min-width: 80px; }
+        .metric-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 600; color: var(--accent); }
+        .metric-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.15rem; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+        .tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.75rem; border: 1px solid var(--border); border-radius: 3px; color: var(--text-secondary); }
 
-        .project-number {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            color: rgba(232, 98, 44, 0.15);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        .project-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-        .project-context {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-
-        /* ---- Challenge / Approach / Outcome ---- */
-        .project-detail {
-            margin-bottom: 1.2rem;
-        }
-        .project-detail-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-bottom: 0.3rem;
-        }
-        .project-detail-text {
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-            line-height: 1.75;
-        }
-
-        /* ---- Metrics row ---- */
-        .project-metrics {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
-        .metric {
-            min-width: 80px;
-        }
-        .metric-value {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-        .metric-label {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-top: 0.15rem;
-        }
-
-        /* ---- Tags ---- */
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.35rem 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            color: var(--text-secondary);
-        }
-
-        /* ---- Project images ---- */
-        .project-visuals {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .project-img-main {
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-        }
-        .project-img-main img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .project-visuals { display: flex; flex-direction: column; gap: 1rem; }
+        .project-img-main { aspect-ratio: 16/10; overflow: hidden; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; }
+        .project-img-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
         .project-img-main:hover img { transform: scale(1.04); }
-        .project-img-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .project-img-thumb {
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-        }
-        .project-img-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .project-img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .project-img-thumb { aspect-ratio: 16/10; overflow: hidden; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; }
+        .project-img-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
         .project-img-thumb:hover img { transform: scale(1.04); }
 
         /* =============================================================
            CONTACT / FOOTER
-           - Centered CTA section with dark background
         ============================================================= */
-        .contact-section {
-            background: var(--bg-secondary);
-            color: var(--text-dark);
-            padding: 7rem 2rem;
-            text-align: center;
-        }
-        .contact-section .section-heading {
-            color: var(--text-dark);
-        }
-        .contact-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-dark-muted);
-            max-width: 500px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.7;
-        }
-        .contact-links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.85rem 2rem;
-            border-radius: 5px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .contact-btn.primary {
-            background: var(--accent);
-            color: white;
-        }
+        .contact-section { background: var(--bg-secondary); color: var(--text-dark); padding: 7rem 2rem; text-align: center; }
+        .contact-section .section-heading { color: var(--text-dark); }
+        .contact-subtitle { font-size: 1.05rem; color: var(--text-dark-muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .contact-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; border-radius: 5px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; font-weight: 600; transition: all 0.3s; }
+        .contact-btn.primary { background: var(--accent); color: white; }
         .contact-btn.primary:hover { background: #d4571f; }
-        .contact-btn.outline {
-            border: 1.5px solid var(--text-dark);
-            color: var(--text-dark);
-        }
-        .contact-btn.outline:hover {
-            background: var(--text-dark);
-            color: var(--bg-secondary);
-        }
-
-        footer {
-            background: var(--bg-primary);
-            padding: 2rem;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.1em;
-        }
+        .contact-btn.outline { border: 1.5px solid var(--text-dark); color: var(--text-dark); }
+        .contact-btn.outline:hover { background: var(--text-dark); color: var(--bg-secondary); }
+        footer { background: var(--bg-primary); padding: 2rem; text-align: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-secondary); letter-spacing: 0.1em; }
 
         /* =============================================================
            IMAGE MODAL
-           - Full-screen overlay for zoomed project images
         ============================================================= */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            background: rgba(0,0,0,0.92);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            cursor: zoom-out;
-        }
+        .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.92); display: none; align-items: center; justify-content: center; padding: 2rem; cursor: zoom-out; }
         .modal-overlay.active { display: flex; }
-        .modal-overlay img {
-            max-width: 90vw;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
+        .modal-overlay img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 6px; }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.1); color: white; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
         .modal-close:hover { background: rgba(255,255,255,0.2); }
 
         /* =============================================================
            RESPONSIVE
-           - Stack grids to single column on mobile
-           - Reduce heading sizes and padding
         ============================================================= */
         @media (max-width: 900px) {
-            .about-grid,
-            .project-card {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
+            .about-grid, .project-card { grid-template-columns: 1fr; gap: 2.5rem; }
             .project-card.reversed .project-visuals { order: 0; }
             .project-card.reversed .project-content { order: 0; }
-            .skills-bar-inner {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .hero-stats { gap: 2rem; }
+            .skills-bar-inner { grid-template-columns: repeat(2,1fr); }
             .nav-links a:not(.nav-cta) { display: none; }
         }
         @media (max-width: 600px) {
-            .skills-bar-inner {
-                grid-template-columns: 1fr;
-            }
+            .skills-bar-inner { grid-template-columns: 1fr; }
             .section-pad { padding: 4rem 1.25rem; }
             .hero { padding: 4rem 1.25rem 3rem; }
             .project-card { margin-bottom: 5rem; }
@@ -639,10 +181,7 @@
 </head>
 <body>
 
-    <!-- ===========================================================
-         NAVIGATION
-         - Fixed top bar with name logo, section anchors, and CTA
-    =========================================================== -->
+    <!-- =========================================================== NAVIGATION =========================================================== -->
     <nav>
         <div class="nav-inner">
             <a href="#" class="nav-logo">Atharva Bilgi</a>
@@ -655,100 +194,64 @@
         </div>
     </nav>
 
-    <!-- ===========================================================
-         HERO SECTION
-         - Big italic serif heading establishes identity
-         - "& Autonomous Systems" in accent italics shows the
-           cross-domain positioning (mech + software)
-         - Stat blocks provide quick credibility anchors
-    =========================================================== -->
+    <!-- =========================================================== HERO =========================================================== -->
     <section class="hero">
         <div class="hero-inner">
             <div class="hero-label reveal">M.S. Mechanical Engineering — Texas A&M</div>
             <h1 class="reveal reveal-delay-1">Mechanical Design<br><em>& Autonomous Systems</em></h1>
             <p class="hero-subtitle reveal reveal-delay-2">
-                I bridge the gap between mechanical hardware and control software — designing sensor mounts with ±1&thinsp;mm tolerances one day and tuning autonomy stacks the next.
+                I work mainly on designing control systems, writing my own ROS2 and NAV2 packages for deploying autonomy algorithms and designing supporting mechanical structures for my projects.
             </p>
-            <div class="hero-stats reveal reveal-delay-3">
-                <div class="hero-stat">
-                    <div class="hero-stat-value">3+</div>
-                    <div class="hero-stat-label">Years in Robotics & UAV</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">50+</div>
-                    <div class="hero-stat-label">Team Led (FSAE Captain)</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">4</div>
-                    <div class="hero-stat-label">Industry Orgs</div>
-                </div>
-            </div>
         </div>
         <div class="hero-scroll-hint">↓ Scroll</div>
     </section>
 
-    <!-- ===========================================================
-         ABOUT + EXPERIENCE
-         - Light background section for visual rhythm contrast
-         - Left column: narrative summary synthesized from all resumes
-         - Right column: timeline of work history
-    =========================================================== -->
+    <!-- =========================================================== ABOUT + EXPERIENCE =========================================================== -->
     <section id="about" class="section-light section-pad">
         <div class="container about-grid">
             <div class="reveal">
                 <div class="section-tag">About</div>
                 <h2 class="section-heading" style="color: var(--text-dark);">Engineer who prototypes<br>before presenting.</h2>
                 <div class="about-text">
-                    <p>
-                        I'm an M.S. Mechanical Engineering student at Texas A&M, working at the CAST Lab on a full-scale Lincoln MKZ autonomous vehicle. My day-to-day spans mechanical fixture design, drive-by-wire integration, sensor fusion pipelines, and physics-based powertrain modeling in Simulink.
-                    </p>
-                    <p>
-                        Before grad school, I spent a year at AI & Robotics Technology Park (ARTPark) in India designing sub-200g nano-drone airframes, validating battery modules across 15+ configurations, and integrating avionics under tight spatial and thermal constraints. I also trained at ISRO, designing on-orbit refueling mechanisms with GD&T to ASME Y14.5 standards.
-                    </p>
-                    <p>
-                        As captain of Velocita Racing (FSAE), I led 50+ members through a full design-build-test cycle — from CFD-optimized carbon fiber intake packages to a custom 12-channel data acquisition system.
-                    </p>
+                    <p>I'm an M.S. Mechanical Engineering student at Texas A&M, working at the CAST Lab on a full-scale Lincoln MKZ autonomous vehicle. My day-to-day spans designing control systems, drive-by-wire integration, sensor fusion pipelines, and physics-based powertrain modeling in Simulink and designing supporting mechanical structures.</p>
+                    <p>Before grad school, I spent a year at AI & Robotics Technology Park (ARTPark) in India designing sub-200g nano-drone airframes, validating battery modules across different configurations, and integrating avionics under tight spatial and thermal constraints. I also trained at ISRO, designing on-orbit refueling mechanisms with GD&T to ASME Y14.5 standards.</p>
+                    <p>As captain of Velocita Racing (FSAE), I led 50+ members through a full design-build-test cycle - from CFD-optimized carbon fiber intake packages to a custom data acquisition system to optimize subsystem designs.</p>
                 </div>
             </div>
-
             <div class="reveal reveal-delay-2">
                 <div class="section-tag">Experience</div>
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-role">Graduate Student Researcher</div>
-                        <div class="timeline-org">CAST Lab — Texas A&M University</div>
-                        <div class="timeline-date">Aug 2025 — Present</div>
+                        <div class="timeline-org">CAST Lab - Texas A&M University</div>
+                        <div class="timeline-date">Aug 2025 - Present</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-role">Associate Systems Engineer</div>
                         <div class="timeline-org">AI & Robotics Technology Park (ARTPark), India</div>
-                        <div class="timeline-date">Jun 2024 — Jun 2025</div>
+                        <div class="timeline-date">Jun 2024 - Jun 2025</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-role">Mechatronics Intern</div>
                         <div class="timeline-org">ARTPark, India</div>
-                        <div class="timeline-date">Feb 2024 — May 2024</div>
+                        <div class="timeline-date">Feb 2024 - May 2024</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-role">Project Trainee</div>
                         <div class="timeline-org">ISRO (ISITE), Bengaluru</div>
-                        <div class="timeline-date">Jun 2023 — Aug 2023</div>
+                        <div class="timeline-date">Jun 2023 - Aug 2023</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-role">Team Captain — Formula Student</div>
                         <div class="timeline-org">Velocita Racing</div>
-                        <div class="timeline-date">2021 — 2024</div>
+                        <div class="timeline-date">2021 - 2024</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===========================================================
-         SKILLS BAR
-         - Horizontal grid of technical skill categories
-         - Compact, scannable — no fluff
-    =========================================================== -->
+    <!-- =========================================================== SKILLS BAR =========================================================== -->
     <section class="skills-bar">
         <div class="skills-bar-inner">
             <div class="skill-category reveal">
@@ -757,7 +260,7 @@
             </div>
             <div class="skill-category reveal reveal-delay-1">
                 <h4>Simulation</h4>
-                <p>MATLAB / Simulink / Simscape · Ansys FEA & CFD · Gazebo · RViz · HIL Testing</p>
+                <p>MATLAB / Simulink / Simscape · Ansys FEA & CFD · Gazebo · RViz · HIL Testing · NAV2</p>
             </div>
             <div class="skill-category reveal reveal-delay-1">
                 <h4>Prototyping</h4>
@@ -774,58 +277,30 @@
         </div>
     </section>
 
-    <!-- ===========================================================
-         PROJECTS SECTION
-         - Deep case-study cards with Challenge / Approach / Outcome
-         - Each card pulls specific metrics from your resume variants
-         - Image placeholders reference your existing GitHub images
-    =========================================================== -->
+    <!-- =========================================================== PROJECTS =========================================================== -->
     <section id="projects" class="projects-section section-pad">
         <div class="container">
             <div class="section-tag reveal">Projects</div>
             <h2 class="section-heading reveal" style="margin-bottom: 5rem;">Selected Work</h2>
 
-            <!-- ---- PROJECT 01: Lincoln MKZ Autonomous Vehicle ---- -->
+            <!-- ---- 01: Lincoln MKZ ---- -->
             <div class="project-card reveal">
                 <div class="project-content">
                     <div class="project-number">01</div>
                     <h3 class="project-title">Full-Scale Autonomous Vehicle — Lincoln MKZ</h3>
                     <div class="project-context">CAST Lab · Texas A&M · 2025–Present</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Take a stock Lincoln MKZ and make it drive itself — from mechanical sensor mounting and drive-by-wire hardware integration, all the way through a ROS2/NAV2 software autonomy stack running in Docker.
-                        </div>
+                        <div class="project-detail-text">Full-stack autonomous navigation on a Lincoln MKZ platform using ROS2, integrating AMCL-based localization, NAV2 path planning, and a custom Stanley lateral controller with proportional longitudinal control to achieve closed-loop autonomous driving in mapped environments.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Designed custom SolidWorks mounting assemblies for LiDAR, stereo cameras, IMU, and RTK-GPS with ±1&thinsp;mm alignment tolerances and vibration isolation. Integrated drive-by-wire ECUs with vehicle actuators. Built a multi-sensor fusion pipeline (EKF) and a custom NAV2 global planner plugin from scratch in C++. Ran V&V tests correlating HIL simulation with physical vehicle response.
-                        </div>
+                        <div class="project-detail-text">Designed custom SolidWorks mounting assemblies for LiDAR, stereo cameras, IMU, and RTK-GPS. Bridging the gap between simulation and real-world autonomous vehicle deployment requires validated software stacks tested on production vehicle platforms. Integrated ROS2 autonomy stack on a drive-by-wire vehicle providing a realistic testbed for evaluating localization accuracy, controller performance, and sensor fusion under real dynamic conditions.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            Achieved &lt;50&thinsp;ms actuator response latency. Autonomous navigation goals executed with the car moving 22+ meters on planned paths. Root-caused localization drift and actuator lag through structured failure analysis.
-                        </div>
+                        <div class="project-detail-text">Currently testing autonomous navigation goals executed with the car moving on planned paths. Root-caused localization drift and actuator lag through structured failure analysis.</div>
                     </div>
-
-                    <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value">&lt;50ms</div>
-                            <div class="metric-label">Actuator Latency</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">22m+</div>
-                            <div class="metric-label">Autonomous Path</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">±1mm</div>
-                            <div class="metric-label">Mount Tolerance</div>
-                        </div>
-                    </div>
-
                     <div class="project-tags">
                         <span class="tag">SolidWorks</span>
                         <span class="tag">ROS2 / NAV2</span>
@@ -841,53 +316,35 @@
                             <img src="images/IMG_0904.jpg" alt="Lincoln MKZ autonomous vehicle with sensor suite">
                         </div>
                         <div class="project-img-thumb" onclick="openModal(this)">
-                            <img src="images/rviz.png" alt="Rviz_sims">
+                            <img src="images/rviz.png" alt="RViz navigation visualization">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ---- PROJECT 02: PHEV Powertrain Modeling ---- -->
+            <!-- ---- 02: PHEV Powertrain ---- -->
             <div class="project-card reversed reveal">
                 <div class="project-content">
                     <div class="project-number">02</div>
                     <h3 class="project-title">Parallel Hybrid EV Powertrain Modeling</h3>
                     <div class="project-context">CAST Lab · MATLAB/Simulink · 2025–Present</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Build a physics-based plant model of a 12-ton parallel hybrid electric vehicle — diesel engine, dual electric motors, battery management, and thermal subsystems — to validate supervisory control strategies before hardware deployment.
-                        </div>
+                        <div class="project-detail-text">Build a physics-based plant model of a 12-ton parallel hybrid electric vehicle — diesel engine, dual electric motors, battery management, and thermal subsystems to validate supervisory control strategies before hardware deployment.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Modeled each subsystem using manufacturer-supplied hardware data. Implemented both causal and acausal (Simscape) modeling approaches. Built Stateflow-based supervisory control logic for mode transitions. Validated the complete powertrain under multiple standard drive cycles (UDDS, HWFET, US06).
-                        </div>
+                        <div class="project-detail-text">Modeled each subsystem using manufacturer-supplied hardware data. Implemented both causal and acausal (Simscape) modeling approaches. Built Stateflow-based supervisory control logic for mode transitions. Validated the complete powertrain under multiple standard drive cycles.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            Complete P2 hybrid configuration model capturing battery voltages, internal resistance, and thermal saturation limits. Control strategies validated against drive-cycle energy targets.
-                        </div>
+                        <div class="project-detail-text">Complete P2 hybrid configuration model capturing battery voltages, internal resistance, and thermal saturation limits. Control strategies validated against drive-cycle energy targets.</div>
                     </div>
-
                     <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value">12-ton</div>
-                            <div class="metric-label">Vehicle Class</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">2+1</div>
-                            <div class="metric-label">Motor + Engine Config</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">3</div>
-                            <div class="metric-label">Drive Cycles Tested</div>
-                        </div>
+                        <div class="metric"><div class="metric-value">12-ton</div><div class="metric-label">Vehicle Class</div></div>
+                        <div class="metric"><div class="metric-value">2+1</div><div class="metric-label">Motor + Engine Config</div></div>
+                        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Drive Cycles Tested</div></div>
                     </div>
-
                     <div class="project-tags">
                         <span class="tag">Simulink</span>
                         <span class="tag">Simscape</span>
@@ -911,47 +368,35 @@
                 </div>
             </div>
 
-            <!-- ---- PROJECT 03: Nano Drone Development ---- -->
+            <!-- ---- 03: Nano Drone ---- -->
             <div class="project-card reveal">
                 <div class="project-content">
                     <div class="project-number">03</div>
                     <h3 class="project-title">Nano Drone Development</h3>
                     <div class="project-context">ARTPark · India · 2024–2025</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Design a sub-200g nano-drone platform from scratch — mechanical airframe, avionics integration, battery module validation — all under extreme spatial, weight, and thermal constraints.
-                        </div>
+                        <div class="project-detail-text">Design a sub-200g nano-drone platform from scratch - mechanical airframe, avionics integration, battery module validation — all under extreme spatial, weight, and thermal constraints.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Created modular airframe CAD in SolidWorks/Onshape with GD&T callouts. Designed 18650 Li-ion battery modules with capacity grading and internal resistance matching (±5&thinsp;mΩ). Tested 15+ battery configurations measuring discharge curves and thermal performance. Ran FEA for structural validation and CFD for airflow optimization. Integrated avionics, power electronics, and sensor suites with custom interfaces validated under shock, vibration, and thermal cycling.
-                        </div>
+                        <div class="project-detail-text">Created modular airframe CAD in SolidWorks/Onshape with GD&T callouts. Designed 18650 Li-ion battery modules with capacity grading and internal resistance matching. Tested different battery configurations measuring discharge curves and thermal performance. Ran FEA for structural validation and CFD for airflow optimization. Integrated avionics, power electronics, and sensor suites with custom interfaces validated under shock, vibration, and thermal cycling.</div>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-label">Controls</div>
+                        <div class="project-detail-text">Responsible for conducting low fidelity simulations to evaluate path planning algorithms and implementing motor control strategies, gaining practical exposure to control systems and technical coordination, mainly by using Matlab.</div>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-label">Systems</div>
+                        <div class="project-detail-text">Implemented system models for position mode, off-board mode, waypoint navigation using Simulink for testing of control software. Performed hands-on testing of multiple battery chemistries and configuration to recommend the most efficient set-up.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            Delivered field-deployable nano-drone platform. Corrective actions from root-cause analysis on cell failures improved pack longevity. Engineering documentation (BOMs, ICDs, assembly procedures) enabled cross-team handoff.
-                        </div>
+                        <div class="project-detail-text">Delivered field-deployable nano-drone platform. Corrective actions from root-cause analysis on cell failures improved pack longevity. Engineering documentation (BOMs, ICDs, assembly procedures) enabled cross-team handoff.</div>
                     </div>
-
                     <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value">&lt;200g</div>
-                            <div class="metric-label">Total Weight</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">15+</div>
-                            <div class="metric-label">Battery Configs</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">±5mΩ</div>
-                            <div class="metric-label">Resistance Matching</div>
-                        </div>
+                        <div class="metric"><div class="metric-value">&lt;200g</div><div class="metric-label">Total Weight</div></div>
                     </div>
-
                     <div class="project-tags">
                         <span class="tag">SolidWorks</span>
                         <span class="tag">Onshape</span>
@@ -972,32 +417,24 @@
                 </div>
             </div>
 
-            <!-- ---- PROJECT 04: SCARA Robot ---- -->
+            <!-- ---- 04: SCARA Robot ---- -->
             <div class="project-card reversed reveal">
                 <div class="project-content">
                     <div class="project-number">04</div>
                     <h3 class="project-title">5-DOF SCARA Drawing Robot</h3>
                     <div class="project-context">Academic Project · MATLAB · Mechatronics</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Build a 5-arm SCARA robot capable of precise drawing — the key difficulty being mechanical backlash in linkages and encoder noise that introduce disturbances into the control loop.
-                        </div>
+                        <div class="project-detail-text">Build a 5-arm SCARA robot capable of precise drawing - the key difficulty being mechanical backlash in linkages and encoder noise that introduce disturbances into the control loop.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Computed optimum link lengths for the workspace envelope. Wrote backlash compensation code and tuned PID controllers to reject disturbances from mechanical play and encoder quantization. Iterated between simulation and hardware testing.
-                        </div>
+                        <div class="project-detail-text">Computed optimum link lengths for the workspace envelope. Wrote backlash compensation code and tuned PID controllers to reject disturbances from mechanical play and encoder quantization. Iterated between simulation and hardware testing.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            Achieved smooth, accurate drawing with minimized trajectory error. Demonstrated closed-loop control robustness under real mechanical imperfections.
-                        </div>
+                        <div class="project-detail-text">Achieved smooth, accurate drawing with minimized trajectory error. Demonstrated closed-loop control robustness under real mechanical imperfections.</div>
                     </div>
-
                     <div class="project-tags">
                         <span class="tag">MATLAB</span>
                         <span class="tag">PID Control</span>
@@ -1017,34 +454,24 @@
                 </div>
             </div>
 
-            <!-- ---- PROJECT 05: On-Orbit Refuelling ---- -->
-            <!-- No images — ISRO project under confidentiality.
-                 Uses full-width single-column layout instead of 2-col grid -->
+            <!-- ---- 05: On-Orbit Refuelling (no images) ---- -->
             <div class="project-card reveal" style="grid-template-columns: 1fr; max-width: 720px;">
                 <div class="project-content">
                     <div class="project-number">05</div>
                     <h3 class="project-title">On-Orbit Refuelling Mechanism</h3>
                     <div class="project-context">ISRO (ISITE) · Bengaluru · 2023 · Images under confidentiality</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Design a probe-and-drogue fuel transfer mechanism for satellite servicing — enabling on-orbit refueling to extend spacecraft operational life. Must meet stringent dimensional tolerances for docking alignment.
-                        </div>
+                        <div class="project-detail-text">Design a probe-and-drogue fuel transfer mechanism for satellite servicing — enabling on-orbit refueling to extend spacecraft operational life. Must meet stringent dimensional tolerances for docking alignment.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Developed mechanical concepts in Siemens NX with tolerance analysis per ASME GD&T standards. Integrated electronic and sensor suites for monitoring docking status. Built FDM prototypes to validate assembly sequence and mechanical fit before hardware release.
-                        </div>
+                        <div class="project-detail-text">Developed mechanical concepts in Siemens NX with tolerance analysis per ASME GD&T standards. Integrated electronic and sensor suites for monitoring docking status. Built FDM prototypes to validate assembly sequence and mechanical fit before hardware release.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            Presented findings in a technical report at a national aerospace conference. Prototype validated assembly feasibility and operational sequence.
-                        </div>
+                        <div class="project-detail-text">Presented findings in a technical report at a national aerospace conference. Prototype validated assembly feasibility and operational sequence.</div>
                     </div>
-
                     <div class="project-tags">
                         <span class="tag">Siemens NX</span>
                         <span class="tag">GD&T</span>
@@ -1054,47 +481,33 @@
                 </div>
             </div>
 
-            <!-- ---- PROJECT 06: FSAE (DAQ + Intake + Leadership) ---- -->
+            <!-- ---- 06: FSAE ---- -->
             <div class="project-card reversed reveal">
                 <div class="project-content">
                     <div class="project-number">06</div>
                     <h3 class="project-title">FSAE — Powertrain, DAQ & Leadership</h3>
                     <div class="project-context">Velocita Racing · Team Captain · 2021–2024</div>
-
                     <div class="project-detail">
                         <div class="project-detail-label">Challenge</div>
-                        <div class="project-detail-text">
-                            Lead a 50+ member Formula Student team through the full design-manufacture-test cycle — while personally owning the air intake package, data acquisition system, and powertrain test infrastructure.
-                        </div>
+                        <div class="project-detail-text">Lead a 50+ member Formula Student team through the full design-manufacture-test cycle — while personally owning the air intake package, data acquisition system, and powertrain test infrastructure.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Approach</div>
-                        <div class="project-detail-text">
-                            Designed an integrated filter–restrictor–plenum air intake package optimized via Ansys Fluent CFD, fabricated with carbon fiber layup. Built a 12-channel DAQ system (strain gauges, gyroscopes, thermal sensors) processed through a custom Simulink model for suspension travel and tire load analysis. Designed powertrain dyno test fixtures. Managed cross-functional execution, secured industrial sponsorship.
-                        </div>
+                        <div class="project-detail-text">Designed an integrated filter–restrictor–plenum air intake package optimized via Ansys Fluent CFD, fabricated with carbon fiber layup. Built a 12-channel DAQ system (strain gauges, gyroscopes, thermal sensors) processed through a custom Simulink model for suspension travel and tire load analysis. Designed powertrain dyno test fixtures. Managed cross-functional execution, secured industrial sponsorship.</div>
+                    </div>
+                    <div class="project-detail">
+                        <div class="project-detail-label">Powertrain System Approach</div>
+                        <div class="project-detail-text">Focused on powertrain and structural subsystems, performing flow and structural analysis validated through physical testing for strength and reliability. Designed and implemented a data acquisition system to collect and analyze inputs from all subsystems, optimizing design considerations and enhancing subsystem testing.</div>
                     </div>
                     <div class="project-detail">
                         <div class="project-detail-label">Outcome</div>
-                        <div class="project-detail-text">
-                            DAQ data directly drove the next-iteration suspension geometry redesign. Top of Class 2021–22 and 2022–23. Presented experimental results at a national aerospace conference.
-                        </div>
+                        <div class="project-detail-text">DAQ data directly drove the next-iteration suspension geometry redesign. Top of Class 2021–22 and 2022–23. Presented experimental results at a national aerospace conference.</div>
                     </div>
-
                     <div class="project-metrics">
-                        <div class="metric">
-                            <div class="metric-value">50+</div>
-                            <div class="metric-label">Team Members</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">12</div>
-                            <div class="metric-label">DAQ Channels</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-value">3 yrs</div>
-                            <div class="metric-label">Leadership</div>
-                        </div>
+                        <div class="metric"><div class="metric-value">50+</div><div class="metric-label">Team Members</div></div>
+                        <div class="metric"><div class="metric-value">12</div><div class="metric-label">DAQ Channels</div></div>
+                        <div class="metric"><div class="metric-value">3 yrs</div><div class="metric-label">Leadership</div></div>
                     </div>
-
                     <div class="project-tags">
                         <span class="tag">Ansys Fluent</span>
                         <span class="tag">Simulink</span>
@@ -1121,11 +534,7 @@
         </div>
     </section>
 
-    <!-- ===========================================================
-         CONTACT SECTION
-         - Light background CTA with email + LinkedIn buttons
-         - Clean and direct — no fluff
-    =========================================================== -->
+    <!-- =========================================================== CONTACT =========================================================== -->
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="section-tag reveal" style="justify-content: center;"><span></span>Contact</div>
@@ -1150,62 +559,29 @@
         </div>
     </section>
 
-    <footer>
-        © 2026 Atharva Bilgi · Built with care in College Station, TX
-    </footer>
+    <footer>© 2026 Atharva Bilgi · College Station, TX</footer>
 
-    <!-- ===========================================================
-         IMAGE MODAL
-         - Click any project image to view full-size
-    =========================================================== -->
+    <!-- =========================================================== IMAGE MODAL =========================================================== -->
     <div class="modal-overlay" id="modal" onclick="closeModal()">
         <button class="modal-close" onclick="closeModal()">✕</button>
         <img id="modalImg" src="" alt="Expanded project image">
     </div>
 
-    <!-- ===========================================================
-         JAVASCRIPT
-         - IntersectionObserver for scroll-triggered .reveal animations
-         - Modal open/close for project image zoom
-    =========================================================== -->
+    <!-- =========================================================== JAVASCRIPT =========================================================== -->
     <script>
-        /* ---- Scroll Reveal ---- 
-           Watches all .reveal elements and adds .visible class
-           when 15% of the element enters the viewport */
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        /* ---- Image Modal ----
-           Opens clicked project image in full-screen overlay */
         const modal = document.getElementById('modal');
         const modalImg = document.getElementById('modalImg');
-
         function openModal(el) {
             const img = el.querySelector('img');
-            if (img) {
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            if (img) { modalImg.src = img.src; modalImg.alt = img.alt; modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
         }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        /* Close modal on Escape key */
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+        function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     </script>
 
 </body>
