@@ -7,13 +7,12 @@
 
     <!-- ===================================================================
          FONTS
-         - "Instrument Serif" for display headings (distinctive, editorial)
-         - "DM Sans" for body text (clean, modern, great readability)
-         - "JetBrains Mono" for code/technical labels (engineering feel)
+         - System font stack: SF Pro (Apple), Segoe UI (Windows), then
+           Helvetica Neue as universal fallback
+         - Calibri for body text (clean, professional, widely available)
+         - SF Mono / Consolas for technical labels
+         - No external font downloads — instant load, zero FOUT
     =================================================================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* =============================================================
@@ -34,9 +33,9 @@
             --accent-glow: rgba(232, 98, 44, 0.15);
             --border: rgba(255,255,255,0.06);
             --border-light: rgba(0,0,0,0.08);
-            --font-display: 'Instrument Serif', Georgia, serif;
-            --font-body: 'DM Sans', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: Calibri, 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            --font-mono: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
         /* =============================================================
@@ -177,12 +176,13 @@
             font-family: var(--font-display);
             font-size: clamp(3.5rem, 8vw, 7rem);
             line-height: 1.05;
-            font-weight: 400;
-            letter-spacing: -0.02em;
+            font-weight: 600;
+            letter-spacing: -0.03em;
             margin-bottom: 2rem;
         }
         .hero h1 em {
-            font-style: italic;
+            font-style: normal;
+            font-weight: 300;
             color: var(--accent);
         }
         .hero-subtitle {
@@ -267,9 +267,10 @@
         .section-heading {
             font-family: var(--font-display);
             font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 400;
+            font-weight: 600;
             line-height: 1.15;
             margin-bottom: 2rem;
+            letter-spacing: -0.02em;
         }
         .about-grid {
             display: grid;
@@ -387,9 +388,10 @@
         .project-title {
             font-family: var(--font-display);
             font-size: 2rem;
-            font-weight: 400;
+            font-weight: 600;
             line-height: 1.2;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
         }
         .project-context {
             font-family: var(--font-mono);
